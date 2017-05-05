@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
+
+<div id="game_heading" data-game-id="<%= @game.id %>">
+  <h1><%= @game.title %></h1>
+  <h2>Game Leader: <%= @game.user.email =%></h2>
+</div>
+<ul class="player_list"> 
+</ul>
+
+~                    

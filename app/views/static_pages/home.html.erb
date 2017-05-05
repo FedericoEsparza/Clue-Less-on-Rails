@@ -2,4 +2,11 @@
 <hr>
 <% if current_user %>
   <h3>Hello, <%= current_user.first_name %> </h3>
+
+  <p class="lead"><%= link_to 'New Game', new_game_path, class: 'btn btn-primary' %></p>
+
+  <ul>
+    <%= render @games %>
+  </ul>
+
 <% end %>

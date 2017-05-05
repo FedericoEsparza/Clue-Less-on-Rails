@@ -1,0 +1,5 @@
+<% if game.open? %>
+  <li><%= link_to "Enter Game #{game.id}: #{game.title}", game_path(game) %></li>
+<% else %>
+  <li><%= "Game: #{game.id} FULL" %></li>
+<% end %>
