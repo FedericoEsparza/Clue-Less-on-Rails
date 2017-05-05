@@ -50,3 +50,15 @@
      background-size: cover;
      background: rgba(25, 25, 112, .62);
  }
+
+ a:link {
+     color: #00d18e;
+ }
+
+ a:visited {
+     color: #d33682;
+ }
+
+ a:hover {
+     color: #74fbb4;
+ }

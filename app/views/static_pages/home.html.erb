@@ -1,3 +1,5 @@
 <h1>Clue-Less</h1>
 <hr>
-<h3>Hello, <%= current_user.first_name if current_user %></h3>
+<% if current_user %>
+  <h3>Hello, <%= current_user.first_name %> </h3>
+<% end %>
