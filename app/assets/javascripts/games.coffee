@@ -4,7 +4,6 @@
 
 jQuery(document).on 'turbolinks:load', ->
     players = $('#players')
-    alert(players.data('game-id'))
     App.game_play = App.cable.subscriptions.create {
         channel: "GameChannel"
         game_id: players.data('game-id')
@@ -14,13 +13,10 @@ jQuery(document).on 'turbolinks:load', ->
 
       disconnected: ->
         # Called when the subscription has been terminated by the server
-
+        
       received: (data) ->
-        alert(data.action)
-        alert(data)
         switch data.action
-          when "make_move"
-            move = data.msg
-          when "new_player"
-            alert()
+          when "add_player"
             players.append data['message']
+          when "remove_player"
+            players.remove data['message']

@@ -5,10 +5,12 @@ class Game < ApplicationRecord
 
   def open?
     open = false
-    players = self.players
-    players.each do |p|
-      if p.user.nil?
-        open = true
+    if self.status
+      players = self.players
+      players.each do |p|
+        if p.user.nil?
+          open = true
+        end
       end
     end
     open
@@ -24,14 +26,21 @@ class Game < ApplicationRecord
       if !added & p.user.nil?
         p.user = user
 	p.save
-        PlayerBroadcastJob.perform_later(p)
+        PlayerBroadcastJob.perform_now(p,"add_player")
 	added = true
       end
     end
   end
 
   def remove_user(user)
-    self.players.where(user: user).firsrt.user=nil
+    players = self.players
+    players.each do |p|
+      if p.user == user
+        p.user = nil
+        p.save
+        PlayerBroadcastJob.perform_now(p,"remove_player")
+      end
+    end
   end
 
   def start(players)

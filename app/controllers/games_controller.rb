@@ -7,10 +7,16 @@ class GamesController < ApplicationController
   end
 
   def show
-    Rails.logger.info "***** PARAMS ID: #{params[:id]} ******"
     @game = Game.find_by(id: params[:id])
-    Rails.logger.info "***** GAME: #{@game.title} ******"
+    @user = current_user
+    @players = @game.players
+    @players.each do |p|
+      if p.user == @user
+        @player = p
+      end
+    end
   end
+
 
   def new
     @game = Game.new
@@ -30,6 +36,7 @@ class GamesController < ApplicationController
     players += (Player.create [name:"Mrs. Peacock", game:@game])
     players += (Player.create [name:"Professor Plum", game:@game])
     @game.players = players
+    @game.status = true
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
@@ -60,6 +67,10 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def game_play
+    winner = false
+  end    
 
   private
     def set_game
