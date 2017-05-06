@@ -13,6 +13,7 @@ jQuery(document).on 'turbolinks:load', ->
         $("<li>TEST</li>").appendTo(p_list);
       disconnected: ->
         # Called when the subscription has been terminated by the server
-	
       received: (data) ->
-
+        switch data.action
+          when "make_move"
+            move = data.msg

@@ -54,6 +54,7 @@ class GamesController < ApplicationController
   private
     def set_game
       @game = Game.find(params[:id])
+      @players = @game.players
     end
 
     def game_params 

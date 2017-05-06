@@ -10,7 +10,8 @@ class GameChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def send_message(data)
+  def make_move(data)
+    Game.make_move(current_user, data)
   end
 end
 

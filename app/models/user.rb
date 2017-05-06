@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :games, :through => :players
+  has_and_belongs_to_many :players
+
   validates_presence_of :name
 
   def first_name
