@@ -22,7 +22,7 @@
 </div>
 <div class="footer">
   <div class="user-menu">
-    <span class="user-menu_profile-pic"></span><span class="user-menu_username"><%= current_user.email %></span>
+    <span class="user-menu_profile-pic"></span><span class="user-menu_username"><%= link_to current_user.first_name, edit_user_registration_path  %></span>
     <span class="connection_status">online</span>
     <span class="logout"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></span>
   </div>

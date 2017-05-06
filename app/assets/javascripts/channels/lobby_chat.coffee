@@ -9,7 +9,7 @@ App.lobby_chat = App.cable.subscriptions.create "LobbyChatChannel",
     # Called when there's incoming data on the websocket for this channel
     $lobbymessages = $('#lobby_messages')
     $lobbymessages.append data
-    $lobbymessages.scrollTop $lobbymessages.prop('scrollHeight')
+    $('html, body').animate({scrollTop:$(document).height()}, 1000)
 
   send_lobby_message: (message) ->
     @perform 'send_lobby_message', lobby_message: message

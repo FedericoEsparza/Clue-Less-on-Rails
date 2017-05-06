@@ -3,8 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $lobbymessages = $('#lobby_messages')
-  $lobbymessages.scrollTop $lobbymessages.prop('scrollHeight')
+  $('html, body').animate({scrollTop:$(document).height()}, 1000)
   $('#lobby_message_input').focus()
 
 $(document).on 'keypress', '#lobby_message_input', (e) ->
