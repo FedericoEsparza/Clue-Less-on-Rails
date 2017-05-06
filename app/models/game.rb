@@ -4,11 +4,18 @@ class Game < ApplicationRecord
   has_many :users, :through => :players
 
   def open?
-    self.players.count < 6 
+    open = false
+    players = self.players
+    players.each do |p|
+      if p.user.nil?
+        open = true
+      end
+    end
+    open
   end
 
   def add_user(user)
-    added = false
+    added = user.players.where(game_id: self.id)
     players = self.players
     players.each do |p|
       if !added & p.user.nil?
@@ -17,6 +24,10 @@ class Game < ApplicationRecord
 	added = true
       end
     end
+  end
+
+  def remove_user(user)
+    self.players.where(user: user).firsrt.user=nil
   end
 
   def start(players)
