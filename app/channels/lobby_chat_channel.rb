@@ -8,6 +8,6 @@ class LobbyChatChannel < ApplicationCable::Channel
   end
 
   def send_lobby_message (data)
-    ActionCable.server.broadcast 'lobby_chat_channel', data['lobby_message']
+    LobbyMessage.create content: data['lobby_message']
   end
 end
