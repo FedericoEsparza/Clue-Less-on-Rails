@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery(document).on 'turbolinks:load', ->
-    game_id = $('#game_heading').data('game-id')
+    game_id = $('#game-heading').data('game-id')
     players = $('#players')
     App.global_chat = App.cable.subscriptions.create {
         channel: "GameChannel"
@@ -18,3 +18,4 @@ jQuery(document).on 'turbolinks:load', ->
           when "make_move"
             move = data.msg
           when "new_player"
+            players.append data['message']

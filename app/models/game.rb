@@ -15,9 +15,12 @@ class Game < ApplicationRecord
   end
 
   def add_user(user)
-    added = false#user.players.where(game_id: self.id).exists?
+    added = false
     players = self.players
     players.each do |p|
+      if p.user == user
+        added = true
+      end
       if !added & p.user.nil?
         p.user = user
 	p.save
