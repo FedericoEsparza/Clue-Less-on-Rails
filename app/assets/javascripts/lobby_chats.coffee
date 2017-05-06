@@ -11,3 +11,7 @@ $(document).on 'keypress', '#lobby_message_input', (e) ->
     App.lobby_chat.send_lobby_message(e.target.value)
     e.target.value = ''
     e.preventDefault()
+
+$(document).on 'turbolinks:load', ->
+    $('html, body').animate({scrollTop:$(document).height()}, 1000)
+    $('#lobby_message_input').focus()
