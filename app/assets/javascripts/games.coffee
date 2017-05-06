@@ -16,3 +16,19 @@ jQuery(document).on 'turbolinks:load', ->
         switch data.action
           when "make_move"
             move = data.msg
+
+          when "new_player"
+            players.append data['message']
+
+      send_message: (message, game_id, action) ->
+        @perform 'send_message', message: message, game_id: game_id, action: action
+
+
+    $('#new_message').submit (e) ->
+      $this = $(this)
+      textarea = $this.find('#message_body')
+      if $.trim(textarea.val()).length > 1
+        App.global_chat.send_message textarea.val(), messages.data('game-id'), "chat"
+        textarea.val('')
+      e.preventDefault()
+      return false
