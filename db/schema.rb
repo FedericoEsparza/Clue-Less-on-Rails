@@ -44,6 +44,14 @@ ActiveRecord::Schema.define(version: 20170506120407) do
     t.bigint "game_id", null: false
   end
 
+  create_table "lobby_messages", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_lobby_messages_on_user_id"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -75,14 +83,6 @@ ActiveRecord::Schema.define(version: 20170506120407) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
-  create_table "lobby_messages", force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_lobby_messages_on_user_id"
-  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -105,9 +105,9 @@ ActiveRecord::Schema.define(version: 20170506120407) do
 
   add_foreign_key "games", "locations"
   add_foreign_key "games", "users"
+  add_foreign_key "lobby_messages", "users"
   add_foreign_key "locations", "games"
   add_foreign_key "locations", "locations"
   add_foreign_key "locations", "players"
   add_foreign_key "players", "locations"
-  add_foreign_key "lobby_messages", "users"
 end

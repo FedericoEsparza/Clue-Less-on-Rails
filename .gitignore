@@ -19,3 +19,6 @@
 .byebug_history
 /public/packs
 /node_modules
+
+# file's already checked in. Ignoring avoids local postgres auth errors
+database.yml
