@@ -17,4 +17,4 @@ jQuery(document).on 'turbolinks:load', ->
         switch data.action
           when "make_move"
             move = data.msg
-
+          when "new_player"

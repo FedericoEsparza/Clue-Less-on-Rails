@@ -9,6 +9,6 @@ class PlayerBroadcastJob < ApplicationJob
   private
 
   def render_player(player)
-    PlayerController.render partial: 'players/player', locals: {player: player}
+    PlayerController.render partial: 'players/player'
   end
 end
