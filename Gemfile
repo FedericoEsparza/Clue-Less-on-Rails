@@ -57,3 +57,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise', github: 'plataformatec/devise', ref: '83002017'
+
+gem 'redis', '~> 3.3', '>= 3.3.3'

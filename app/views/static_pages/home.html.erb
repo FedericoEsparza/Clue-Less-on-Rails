@@ -1,12 +1,15 @@
-<h1>Clue-Less</h1>
+<h1 class="shift">Clue-Less</h1>
 <hr>
-<% if current_user %>
-  <h3>Hello, <%= current_user.first_name %> </h3>
 
-  <p class="lead"><%= link_to 'New Game', new_game_path, class: 'btn btn-primary' %></p>
+<div class="shift">
+  <% if current_user %>
+    <h3>Hello, <%= current_user.first_name %> </h3>
 
-  <ul>
-    <%= render @games %>
-  </ul>
+    <p class="lead"><%= link_to 'New Game', new_game_path, class: 'btn btn-primary' %></p>
 
-<% end %>
+    <ul>
+      <%= render @games %>
+    </ul>
+
+  <% end %>
+</div>

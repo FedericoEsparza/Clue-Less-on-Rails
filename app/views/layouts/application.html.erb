@@ -10,16 +10,21 @@
 
     <body>
 
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <p class="notice shift"><%= notice %></p>
+        <p class="alert shift"><%= alert %></p>
 
-        <% if current_user %>
-          <%= link_to "Profile", edit_user_registration_path %>
-          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to "Register", new_user_registration_path %>
-          <%= link_to "Login", new_user_session_path %>
-        <% end %>
+        <div class="nav">
+
+          <% if current_user %>
+            <%= link_to "Lobby", lobby_path %>
+            <%= link_to "Profile", edit_user_registration_path %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to "Register", new_user_registration_path %>
+            <%= link_to "Login", new_user_session_path %>
+          <% end %>
+          <br>
+        </div>
 
         <div class="site-wrapper">
             <div class="site-wrapper-inner">
