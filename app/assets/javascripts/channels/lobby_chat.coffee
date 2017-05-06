@@ -7,6 +7,7 @@ App.lobby_chat = App.cable.subscriptions.create "LobbyChatChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
+    jQuery('#lobby-messages').append "<p>#{data}</p>"
 
-  send_lobby_message: ->
-    @perform 'send_lobby_message'
+  send_lobby_message: (message) ->
+    @perform 'send_lobby_message', lobby_message: message
