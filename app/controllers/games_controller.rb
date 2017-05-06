@@ -19,12 +19,20 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     @game.user = current_user
+    players = Array.new
+    players += (Player.create [name:"Miss Scarlett", game:@game])
+    players += (Player.create [name:"Colonel Mustard", game:@game])
+    players += (Player.create [name:"Mrs. White", game:@game])
+    players += (Player.create [name:"Mr. Green", game:@game])
+    players += (Player.create [name:"Mrs. Peacock", game:@game])
+    players += (Player.create [name:"Professor Plum", game:@game])
+    @game.players = players
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
-  	Rails.logger.info "HERE NOW 4"
+        Rails.logger.info "FAILED"
         format.html { render :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
