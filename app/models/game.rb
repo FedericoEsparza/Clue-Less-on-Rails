@@ -2,6 +2,7 @@ class Game < ApplicationRecord
   belongs_to :user, optional: true
   has_and_belongs_to_many :players 
   has_many :users, :through => :players
+  has_many :locations
 
   def open?
     open = false

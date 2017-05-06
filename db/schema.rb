@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506102318) do
+ActiveRecord::Schema.define(version: 20170506120407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20170506102318) do
     t.string "title"
     t.bigint "player_id"
     t.boolean "status"
+    t.bigint "location_id"
+    t.index ["location_id"], name: "index_games_on_location_id"
     t.index ["player_id"], name: "index_games_on_player_id"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
@@ -42,13 +44,29 @@ ActiveRecord::Schema.define(version: 20170506102318) do
     t.bigint "game_id", null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "game_id"
+    t.bigint "player_id"
+    t.boolean "hallway"
+    t.bigint "location_id"
+    t.integer "door_location_id"
+    t.index ["game_id"], name: "index_locations_on_game_id"
+    t.index ["location_id"], name: "index_locations_on_location_id"
+    t.index ["player_id"], name: "index_locations_on_player_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "game_id"
     t.string "name"
+    t.bigint "location_id"
     t.index ["game_id"], name: "index_players_on_game_id"
+    t.index ["location_id"], name: "index_players_on_location_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
@@ -77,5 +95,10 @@ ActiveRecord::Schema.define(version: 20170506102318) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "games", "locations"
   add_foreign_key "games", "users"
+  add_foreign_key "locations", "games"
+  add_foreign_key "locations", "locations"
+  add_foreign_key "locations", "players"
+  add_foreign_key "players", "locations"
 end
