@@ -8,6 +8,6 @@ class LobbyChatChannel < ApplicationCable::Channel
   end
 
   def send_lobby_message (data)
-    LobbyMessage.create content: data['lobby_message']
+    LobbyMessage.create content: data['lobby_message'], user: current_user
   end
 end
