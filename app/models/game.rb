@@ -7,6 +7,18 @@ class Game < ApplicationRecord
     self.players.count < 6 
   end
 
+  def add_user(user)
+    added = false
+    players = self.players
+    players.each do |p|
+      if !added & p.user.nil?
+        p.user = user
+	p.save
+	added = true
+      end
+    end
+  end
+
   def start(players)
     #Check for winner
     while status do
