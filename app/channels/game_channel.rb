@@ -8,8 +8,6 @@ class GameChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
-    game = Game.find(params[:id])
-    game.remove_user(current_user) 
   end
 
   def make_move(data)

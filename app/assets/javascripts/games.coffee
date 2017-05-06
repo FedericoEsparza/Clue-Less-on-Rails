@@ -18,8 +18,3 @@ jQuery(document).on 'turbolinks:load', ->
           when "make_move"
             move = data.msg
 
-          when "new_player"
-            players.append data['message']
-
-      send_message: (message, game_id, action) ->
-        @perform 'send_message', message: message, game_id: game_id, action: action

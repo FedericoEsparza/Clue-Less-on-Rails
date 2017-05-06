@@ -15,12 +15,13 @@ class Game < ApplicationRecord
   end
 
   def add_user(user)
-    added = user.players.where(game_id: self.id)
+    added = false#user.players.where(game_id: self.id).exists?
     players = self.players
     players.each do |p|
       if !added & p.user.nil?
         p.user = user
 	p.save
+        PlayerBroadcastJob.perform_later(p)
 	added = true
       end
     end
