@@ -3,12 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $lobbymessages = $('#lobby-messages')
+  $lobbymessages = $('#lobby_messages')
   $lobbymessages.scrollTop $lobbymessages.prop('scrollHeight')
-  $('#lobby-message_input').focus()
+  $('#lobby_message_input').focus()
 
-$(document).on 'keypress', '#lobby-message_input', (e) ->
+$(document).on 'keypress', '#lobby_message_input', (e) ->
   if e.keyCode == 13 and e.target.value
-    App.room.speak(e.target.value)
+    App.lobby_chat.send_lobby_message(e.target.value)
     e.target.value = ''
     e.preventDefault()
