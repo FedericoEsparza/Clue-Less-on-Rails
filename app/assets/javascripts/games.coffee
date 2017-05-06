@@ -4,6 +4,7 @@
 
 jQuery(document).on 'turbolinks:load', ->
     game_id = $('#game_heading').data('game-id')
+    players = $('#players')
     App.global_chat = App.cable.subscriptions.create {
         channel: "GameChannel"
         id: game_id
@@ -22,13 +23,3 @@ jQuery(document).on 'turbolinks:load', ->
 
       send_message: (message, game_id, action) ->
         @perform 'send_message', message: message, game_id: game_id, action: action
-
-
-    $('#new_message').submit (e) ->
-      $this = $(this)
-      textarea = $this.find('#message_body')
-      if $.trim(textarea.val()).length > 1
-        App.global_chat.send_message textarea.val(), messages.data('game-id'), "chat"
-        textarea.val('')
-      e.preventDefault()
-      return false

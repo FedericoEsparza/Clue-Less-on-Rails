@@ -3,12 +3,12 @@ class PlayerBroadcastJob < ApplicationJob
 
   def perform(player)
     ActionCable.server.broadcast "games_#{player.game.id}_channel",
-                                 message: render_player(player)
+                                 message: render_player(player), action: "new_player"
   end
 
   private
 
-  def render_player(message)
+  def render_player(player)
     PlayerController.render partial: 'players/player', locals: {player: player}
   end
 end
