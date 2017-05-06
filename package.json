@@ -2,7 +2,7 @@
   "name": "Clue-Less-on-Rails",
   "private": true,
   "dependencies": {
-    "autoprefixer": "^6.7.7",
+    "autoprefixer": "^7.0.0",
     "babel-core": "^6.24.1",
     "babel-loader": "7.x",
     "babel-preset-env": "^1.4.0",
@@ -27,7 +27,7 @@
     "react-dom": "^15.5.4",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
-    "webpack": "^2.4.1",
+    "webpack": "^2.5.1",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0"
   },
