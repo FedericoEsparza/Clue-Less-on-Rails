@@ -90,4 +90,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'http://clue-less-on-rails-staging.herokuapp.com' }
+  config.action_cable.url = "wss://clue-less-on-rails-staging.herokuapp.com/cable"
 end
