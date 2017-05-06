@@ -7,6 +7,9 @@ class GamesController < ApplicationController
   end
 
   def show
+    Rails.logger.info "***** PARAMS ID: #{params[:id]} ******"
+    @game = Game.find_by(id: params[:id])
+    Rails.logger.info "***** GAME: #{@game.title} ******"
   end
 
   def new
@@ -32,7 +35,6 @@ class GamesController < ApplicationController
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
-        Rails.logger.info "FAILED"
         format.html { render :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end

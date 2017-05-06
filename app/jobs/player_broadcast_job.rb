@@ -2,7 +2,8 @@ class PlayerBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(player)
-    ActionCable.server.broadcast "games_#{player.game.id}_channel",
+    Rails.logger.info "--------------BROADCASTING-------#{player.game.id}--------"
+    ActionCable.server.broadcast "game_channel_#{player.game.id}",
                                  message: render_player(player), action: "new_player"
   end
 

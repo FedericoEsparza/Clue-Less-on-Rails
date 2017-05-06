@@ -3,19 +3,24 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery(document).on 'turbolinks:load', ->
-    game_id = $('#game-heading').data('game-id')
     players = $('#players')
-    App.global_chat = App.cable.subscriptions.create {
+    alert(players.data('game-id'))
+    App.game_play = App.cable.subscriptions.create {
         channel: "GameChannel"
-        id: game_id
+        game_id: players.data('game-id')
       },
       connected: ->
         # Called when the subscription is ready for use on the server
+
       disconnected: ->
         # Called when the subscription has been terminated by the server
+
       received: (data) ->
+        alert(data.action)
+        alert(data)
         switch data.action
           when "make_move"
             move = data.msg
           when "new_player"
+            alert()
             players.append data['message']

@@ -1,8 +1,8 @@
 # Be sure to restart your server when you modify this file. Action Cable runs in a loop that does not support auto reloading.
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    game = Game.find(params[:id])
-    stream_from game
+    game = Game.find(params['game_id'])
+    stream_from "game_channel_#{params['game_id']}"
     game.add_user(current_user)
   end
 
