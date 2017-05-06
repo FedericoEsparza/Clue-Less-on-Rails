@@ -1,4 +1,15 @@
 
 <div class="lobby-message">
-  <p><%= lobby_message.content %> </p>
+  <a href="" class="lobby_message_profile-pic"></a>
+  <a href="" class="lobby_message_username"><%= lobby_message.user.email %></a>
+
+  <span class="lobby_message_timestamp">
+    <%= lobby_message.created_at %>
+  </span>
+
+  <span class="lobby_message_star"></span>
+  <span class="lobby_message_content">
+    <%= lobby_message.content %>
+  </span>
+
 </div>
