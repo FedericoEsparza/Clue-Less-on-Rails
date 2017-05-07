@@ -16,5 +16,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 Rails.application.config.assets.precompile += %w( game-board.js )
 Rails.application.config.assets.precompile += %w( game-ui.js )
-Rails.application.config.assets.precompile += %w( game-websocket.js )
+# Rails.application.config.assets.precompile += %w( game-websocket.js )
 # Rails.application.config.assets.precompile += %w( game-update.js )
