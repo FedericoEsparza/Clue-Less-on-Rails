@@ -1,2 +1,265 @@
-<h1>GameAreas#show</h1>
-<p>Find me in app/views/game_areas/show.html.erb</p>
+<div id="notificationArea" class="container"></div>
+<div id="clue-content">
+    <div id="clue-status">
+        <span id="status-text">Game status:</span>
+        <span id="status-message">...</span>
+        <span id="clue-character"></span>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="row">
+        <div class="col-sm-6 game game-container">
+            <div class="board-img-container">
+                <div id="clue-game">
+                    <%= image_tag("missscarlettoken_360.png", class: "token", id: "msScarletToken") %>
+                    <%= image_tag("colonelmustardtoken_360.png", class: "token", id: "colMustardToken") %>
+                    <%= image_tag("mrswhitetoken_360.png", class: "token", id: "mrsWhiteToken") %>
+                    <%= image_tag("mrgreentoken_360.png", class: "token", id: "mrGreenToken") %>
+                    <%= image_tag("mrspeacocktoken_360.png", class: "token", id: "mrsPeacockToken") %>
+                    <%= image_tag("professorplumtoken_360.png", class: "token", id: "profPlumToken") %>
+
+                    <%= image_tag("candlesticktoken_360.png", class: "token", id: "candlestickToken") %>
+                    <%= image_tag("knifetoken_360.png", class: "token", id: "knifeToken") %>
+                    <%= image_tag("leadpipetoken_360.png", class: "token", id: "pipeToken") %>
+                    <%= image_tag("revolvertoken_360.png", class: "token", id: "revolverToken") %>
+                    <%= image_tag("ropetoken_360.png", class: "token", id: "ropeToken") %>
+                    <%= image_tag("wrenchtoken_360.png", class: "token", id: "wrenchToken") %>
+
+                    <!-- <img class="token-highlight hidden" id="characterHighlight" src="img/selection.png"/> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3 col-xs-offset-0 col-sm-offset-1 game game-notes-container">
+            <h1 class="text-center notes-heading">Game Notes:</h1><%= image_tag("game-notes.png") %>
+        </div>
+        <div id="col-sm-3 clue-actions">
+            <div class="btn-group-vertical btn-block setup-phase">
+                <button id="addPlayerBtn" type="button" class="btn btn-primary btn-block">Join Game</button>
+                <button id="setTokenBtn" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#setTokenModal">Select Token</button>
+                <button id="startGameBtn" type="button" class="btn btn-primary btn-block">Start Game</button>
+            </div>
+            <div class="btn-group-vertical btn-block active-phase hidden">
+                <button id="moveBtn" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#moveModal">Move</button>
+                <button id="makeSuggestionBtn" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#makeSuggestionModal">Make Suggestion</button>
+                <button id="disproveSuggestionBtn" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#disproveSuggestionModal">Disprove Suggestion</button>
+                <button id="makeAccusationBtn" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#makeAccusationModal">Make Accusation</button>
+                <button id="endTurnBtn" type="button" class="btn btn-primary btn-block">End Turn</button>
+            </div>
+            <button id="handBtn" type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#handModal">My Cards</button>
+        </div>
+    </div>
+</div>
+<div style="clear: both;"></div>
+<div id="footer"></div>
+
+<div class="modal fade" id="disproveSuggestionModal" tabindex="-1" role="dialog" aria-labelledby="Disprove suggestion modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="disproveSuggestionModalLabel">Disprove with a card</h4>
+            </div>
+            <div class="modal-body" id="disproveSuggestionModalBody">
+                <p>Disprove the suggestion with one of your cards.</p>
+                <select class="form-control">
+                    <!-- built by JS -->
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="disproveSuggestionModalOk">Disprove</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="makeAccusationModal" tabindex="-1" role="dialog" aria-labelledby="Make accusation modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="makeAccusationModalLabel">Make an accusation</h4>
+            </div>
+            <div class="modal-body" id="makeAccusationModalBody">
+                <h4>Accuse character</h4>
+                <select class="form-control character-list">
+                    <option>Ms. Scarlet</option>
+                    <option>Col. Mustard</option>
+                    <option>Mrs. White</option>
+                    <option>Mr. Green</option>
+                    <option>Mrs. Peacock</option>
+                    <option>Prof. Plum</option>
+                </select>
+
+                <h4>Select weapon</h4>
+                <select class="form-control weapon-list">
+                    <option>Candlestick</option>
+                    <option>Knife</option>
+                    <option>Pipe</option>
+                    <option>Revolver</option>
+                    <option>Rope</option>
+                    <option>Wrench</option>
+                </select>
+
+                <h4>Select room</h4>
+                <select class="form-control room-list">
+                    <option>Kitchen</option>
+                    <option>Ballroom</option>
+                    <option>Conservatory</option>
+                    <option>Dining room</option>
+                    <option>Billiard room</option>
+                    <option>Library</option>
+                    <option>Lounge</option>
+                    <option>Hall</option>
+                    <option>Study</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="makeAccusationModalOk">Accuse</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="makeSuggestionModal" tabindex="-1" role="dialog" aria-labelledby="Make suggestion modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="makeSuggestionModalLabel">Make a suggestion</h4>
+            </div>
+            <div class="modal-body" id="makeSuggestionModalBody">
+                <h4>Suggest a character</h4>
+                <select class="form-control character-list">
+                    <option>Ms. Scarlet</option>
+                    <option>Col. Mustard</option>
+                    <option>Mrs. White</option>
+                    <option>Mr. Green</option>
+                    <option>Mrs. Peacock</option>
+                    <option>Prof. Plum</option>
+                </select>
+
+                <h4>Select a weapon</h4>
+                <select class="form-control weapon-list">
+                    <option>Candlestick</option>
+                    <option>Knife</option>
+                    <option>Pipe</option>
+                    <option>Revolver</option>
+                    <option>Rope</option>
+                    <option>Wrench</option>
+                </select>
+                <br/>
+                <p>Note: the room you are in now is the suggested room</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="makeSuggestionModalOk">Suggest</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="Move modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="moveModalLabel">Move</h4>
+            </div>
+            <div class="modal-body" id="moveModalBody">
+                <select class="form-control">
+                    <!-- built by JS -->
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="moveModalOk">Move</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="setTokenModal" tabindex="-1" role="dialog" aria-labelledby="Set token modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="setTokenModalLabel">Select Token</h4>
+            </div>
+            <div class="modal-body" id="setTokenModalBody">
+                <select class="form-control">
+                    <option>Ms. Scarlet</option>
+                    <option>Col. Mustard</option>
+                    <option>Mrs. White</option>
+                    <option>Mr. Green</option>
+                    <option>Mrs. Peacock</option>
+                    <option>Prof. Plum</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="setTokenModalOk">Select Token</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="handModal" tabindex="-1" role="dialog" aria-labelledby="Hand modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="handModalLabel">My Cards</h4>
+            </div>
+            <div class="modal-body" id="handModalBody">
+                <span>You do not have any cards.</span>
+                <img id="ballroomCard" src="img/ballroomcard_360.png" class="img-rounded hidden" alt="Ballroom card" width="130" height="200">
+                <img id="billiardRoomCard" src="img/billiardcard_360.png" class="img-rounded hidden" alt="Billiard room card" width="130" height="200">
+                <img id="conservatoryCard" src="img/conservatorycard_360.png" class="img-rounded hidden" alt="Conservatory card" width="130" height="200">
+                <img id="diningRoomCard" src="img/diningroomcard_360.png" class="img-rounded hidden" alt="Dining room card" width="130" height="200">
+                <img id="hallCard" src="img/hallcard_360.png" class="img-rounded hidden" alt="Hall card" width="130" height="200">
+                <img id="kitchenCard" src="img/kitchencard_360.png" class="img-rounded hidden" alt="Kitchen card" width="130" height="200">
+                <img id="libraryCard" src="img/librarycard_360.png" class="img-rounded hidden" alt="Library card" width="130" height="200">
+                <img id="loungeCard" src="img/loungecard_360.png" class="img-rounded hidden" alt="Lounge card" width="130" height="200">
+                <img id="studyCard" src="img/studycard_360.png" class="img-rounded hidden" alt="Study card" width="130" height="200">
+
+                <img id="msScarletCard" src="img/missscarletcard_360.png" class="img-rounded hidden" alt="Ms. Scarlet card" width="130" height="200">
+                <img id="colMustardCard" src="img/colonelmustardcard_360.png" class="img-rounded hidden" alt="Col. Mustard card" width="130" height="200">
+                <img id="mrsWhiteCard" src="img/mrswhitecard_360.png" class="img-rounded hidden" alt="Mrs. White card" width="130" height="200">
+                <img id="mrGreenCard" src="img/mrgreencard_360.png" class="img-rounded hidden" alt="Mr. Green card" width="130" height="200">
+                <img id="mrsPeacockCard" src="img/mrspeacockcard_360.png" class="img-rounded hidden" alt="Mrs Peacock card" width="130" height="200">
+                <img id="profPlumCard" src="img/professorplumcard_360.png" class="img-rounded hidden" alt="Prof plum card" width="130" height="200">
+
+                <img id="candlestickCard" src="img/candlestickcard_360.png" class="img-rounded hidden" alt="Candlestick card" width="130" height="200">
+                <img id="knifeCard" src="img/knifecard_360.png" class="img-rounded hidden" alt="Knife card" width="130" height="200">
+                <img id="pipeCard" src="img/leadpipecard_360.png" class="img-rounded hidden" alt="Pipe card" width="130" height="200">
+                <img id="revolverCard" src="img/revolvercard_360.png" class="img-rounded hidden" alt="Revolver card" width="130" height="200">
+                <img id="ropeCard" src="img/ropecard_360.png" class="img-rounded hidden" alt="Rope card" width="130" height="200">
+                <img id="wrenchCard" src="img/wrenchcard_360.png" class="img-rounded hidden" alt="Wrench card" width="130" height="200">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<%= javascript_include_tag 'game-board', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'game-ui', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'game-websocket', 'data-turbolinks-track': 'reload' %>
+

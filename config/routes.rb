@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'game_areas/show'
+  get 'game-front-end', to: 'game_areas#show'
 
   get 'lobby', to: 'lobby_chats#show'
 
