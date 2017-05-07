@@ -2,11 +2,11 @@
   "name": "Clue-Less-on-Rails",
   "private": true,
   "engines": {
-    "node": "6.5.0",
+    "node": "7.1.0",
     "yarn": "0.18.1"
   },
   "scripts": {
-    "heroku-postbuild": "cd vendor && yarn"
+    "heroku-postbuild": "./bin/yarn"
   },
   "dependencies": {
     "autoprefixer": "^7.0.0",
