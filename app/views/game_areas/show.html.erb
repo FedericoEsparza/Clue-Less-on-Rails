@@ -10,7 +10,7 @@
         <div class="col-sm-6 game game-container">
             <div class="board-img-container">
                 <div id="clue-game">
-                    <%= image_tag("missscarlettoken_360.png", class: "token", id: "msScarletToken") %>
+                    <%= image_tag("missscarlettoken_360.png", class: "token", :id => "msScarletToken") %>
                     <%= image_tag("colonelmustardtoken_360.png", class: "token", id: "colMustardToken") %>
                     <%= image_tag("mrswhitetoken_360.png", class: "token", id: "mrsWhiteToken") %>
                     <%= image_tag("mrgreentoken_360.png", class: "token", id: "mrGreenToken") %>
@@ -24,7 +24,7 @@
                     <%= image_tag("ropetoken_360.png", class: "token", id: "ropeToken") %>
                     <%= image_tag("wrenchtoken_360.png", class: "token", id: "wrenchToken") %>
 
-                    <!-- <img class="token-highlight hidden" id="characterHighlight" src="img/selection.png"/> -->
+                    <%= image_tag("selection.png", class: "token-highlight hidden", id: "characterHighlight") %>
                 </div>
             </div>
         </div>
@@ -256,8 +256,5 @@
     </div>
 </div>
 
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-<%= javascript_include_tag 'game-board' %>
-<%= javascript_include_tag 'game-ui' %>
+<%= javascript_include_tag 'game-board', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'game-ui', 'data-turbolinks-track': 'reload' %>
